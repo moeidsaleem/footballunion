@@ -38,8 +38,85 @@ $colors: (
   secondary:  #32db64,
   danger:     #f53d3d,
   light:      #f4f4f4,
-  dark:       #222
+  dark:       #222,
+  lightwa:    #ffffff,
+  greywa:     #7f8c8d,
+  textb:      #15c1ff,
+  textr:      #e84c3d,
+  texto:      #ff8b3e,     
+  black:      #000000,
+  main:       #4cd137
 );
+
+.textr{
+  color:#e84c3d;
+  font-family: 'Roboto Condensed', sans-serif;
+}  
+.texto{
+  color:#ff8b3e;
+  font-family: 'Roboto Condensed', sans-serif;
+}
+.textb{
+  color:#15c1ff;
+  font-family: 'Roboto Condensed', sans-serif;
+}
+.textw{
+  color:#fff !important;
+  
+}
+
+.textBlack{
+  color:#000;
+}
+
+.textgr{
+  color:#b4b4b4;
+  font-family: 'Roboto Condensed', sans-serif;
+  
+}
+
+.textg{
+  color:#4cd137;
+  font-family: 'Roboto Condensed', sans-serif;
+  
+}
+  
+.rowhr
+{
+  border-bottom:#818181 solid 1px !important;
+}
+
+
+
+.rowhrTop
+{
+  border-top:#818181 solid 1px !important;
+}
+.bgRed{
+  background-color:#ff0000;
+}
+
+.bgBlue{
+  background-color:#15c1ff;
+}
+
+.bgBlack{
+  background-color:#000000;
+}
+
+.bgBlacka{
+  background-color:#111111;
+}
+
+.bgWhite{
+  background-color:#ffffff;
+}
+
+.topBlueborder{
+  border-bottom:2px #15c1ff solid;
+}
+
+
 
 
 // App iOS Variables
@@ -86,3 +163,24 @@ $colors: (
 
 @import "roboto";
 @import "noto-sans";
+
+
+.text-input::-moz-placeholder {
+  color: white;
+}
+
+.text-input:-ms-input-placeholder {
+  color: white;
+}
+
+.text-input::-webkit-input-placeholder {
+  text-indent: 0;
+  color: white;
+}
+
+
+.datetime-md .datetime-placeholder { color: #ffffff!important; }
+
+.datetime-ios-placeholder-color{color: #ffffff!important; }
+
+$tabs-md-background:#ffffff;

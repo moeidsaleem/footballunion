@@ -1,0 +1,83 @@
+<ion-header>
+    <ion-toolbar color="lightwa" color="main">
+      <button ion-button menuToggle>
+        <ion-icon name="menu" ></ion-icon>
+      </button>
+      <ion-title text-center>Subscription</ion-title>
+      <ion-buttons end (click)="onLogout()">
+        <button ion-button  icon-right>
+            Logout
+            <ion-icon name="log-out" align="right"  color="light" ></ion-icon>
+
+        </button>
+        
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+    <ion-content padding class="">
+      <ion-slides class="image-slider marginNegative" loop="true" slidesPerView="1" pager *ngIf="packages">
+        <ion-slide *ngFor="let x of packages">
+          <ion-card>
+            <img [src]="x.photo">
+    
+            <ion-card-content>
+              <ion-card-title>
+                {{x?.name}} <br>( {{x?.amount}}$ / {{ x.months + ' Months' }})
+              </ion-card-title>
+              <p padding class="description">
+                  
+                  {{x?.description}}
+
+              </p>
+              <div>
+                  <button class="btn2" ion-button round small color="main" (click)="pay(x)">Subscribe </button>
+                </div>
+            </ion-card-content>
+          </ion-card>
+        </ion-slide>
+
+        <!-- <ion-slide>
+            <ion-card>
+              <img src="assets/imgs/bg2.jpg">
+      
+              <ion-card-content>
+                <ion-card-title>
+                  Moderate <br>( 30$ / 6 Month)
+                </ion-card-title>
+                <p padding class="description">
+                    
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+  
+                </p>
+                <div>
+                    <button class="btn2" ion-button round small color="main">Subscribe </button>
+                  </div>
+              </ion-card-content>
+            </ion-card>
+          </ion-slide>
+
+          <ion-slide>
+              <ion-card>
+                <img src="assets/imgs/bg3.jpg">
+        
+                <ion-card-content>
+                  <ion-card-title>
+                    Premium <br>( 50$ / Lifetime)
+                  </ion-card-title>
+                  <p padding class="description">
+                      
+                      Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+    
+                  </p>
+                  <div>
+                      <button class="btn2" ion-button round small color="main">Subscribe </button>
+                    </div>
+                </ion-card-content>
+              </ion-card>
+            </ion-slide> -->
+
+
+      </ion-slides>
+    
+    </ion-content>

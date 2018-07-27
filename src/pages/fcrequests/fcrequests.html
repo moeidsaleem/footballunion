@@ -1,0 +1,32 @@
+<ion-header>
+
+  <ion-navbar  color="main">
+    <button ion-button menuToggle >
+      <ion-icon name="menu" ></ion-icon>
+    </button>
+    <ion-title>Club requests</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+  <ion-list *ngIf="requests">
+    <ion-list-header>
+      Latest Club requests
+    </ion-list-header>
+    <ion-item *ngFor="let x of requests">
+      <ion-icon name='ionic' item-start color="main"></ion-icon>
+      <p>{{x?.clubName}} has posted a request</p>
+      <button ion-button color="main" item-end (click)="view(x)">
+        View
+      </button>
+    </ion-item>
+
+   
+
+
+  </ion-list>
+
+</ion-content>

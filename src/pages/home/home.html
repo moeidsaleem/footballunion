@@ -1,14 +1,93 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
-  </ion-navbar>
-</ion-header>
+    <ion-toolbar color="main">
+      <button ion-button menuToggle>
+        <ion-icon name="menu" ></ion-icon>
+      </button>
+      <ion-title text-center>Football Union</ion-title>
+      <ion-buttons end>
+        <ion-icon name="notifications" align="right" color="lightwa"  margin-right></ion-icon>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
 
-<ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+
+<ion-content>
+
+    <ion-searchbar  
+     showCancelButton="true"
+    cancelButtonText="cancel"
+    debounce =250
+    placeholder ="Search "
+     style="background-color:transparent" [(ngModel)]="userFilter.title" (ionSelect)="clicked($event)"></ion-searchbar>
+
+    <main *ngIf="userFilter.title ==''">
+    <ion-row >
+        <ion-item-divider no-lines style="background-color:transparent"><small class="textg">Tredning this week</small>
+          <small item-end class="textg">View all</small>
+        </ion-item-divider>
+        <hr>
+      </ion-row>
+
+    <ion-row *ngIf="videos">
+        <ion-slides  autoplay="5000" loop="true" speed="500" slidesPerView="4" >
+  
+          <ion-slide *ngFor="let x of videos" >
+            <img [src]="x.thumbnail" alt="">
+          </ion-slide>
+  
+        </ion-slides>
+  
+      </ion-row>
+  
+ 
+  <ion-row margin-top></ion-row>
+  <ion-card  (click)="getVideos('attacker')">
+    <img src="assets/imgs/bg1.jpg">
+    <div class="card-title">Attacker</div>
+    <div class="card-subtitle">Most Popular</div>
+    <div>
+      <button class="btn2" ion-button round small color="main">View </button>
+    </div>
+  </ion-card>
+  <ion-card  (click)="getVideos('defender')">
+    <img src="assets/imgs/bg3.jpg">
+    <div class="card-title">Defender</div>
+    <div class="card-subtitle">Most Popular</div>
+    <div>
+      <button class="btn2" ion-button round small color="main">View </button>
+    </div>
+  </ion-card>
+  <ion-card text-center  (click)="getVideos('midfielder')">
+    <img src="assets/imgs/bg2.jpg" />
+    <div class="card-title">Mid Fielder</div>
+    <div class="card-subtitle">Most Popular</div>
+    <div>
+      <button class="btn2" ion-button round small color="main">View </button>
+    </div>
+  </ion-card>
+  <ion-card text-center (click)="getVideos('goalkeeper')">
+    <img src="assets/imgs/bg3.jpg" />
+    <div class="card-title">Goal Keeper</div>
+    <div class="card-subtitle">Most Popular</div>
+    <div>
+      <button class="btn2" ion-button round small color="main">View </button>
+    </div>
+  </ion-card>
+</main>
+
+<main *ngIf="userFilter.title !==''">
+
+  <ion-list>
+    <ion-item *ngFor="let y of videos | filterBy:userFilter" >
+      <ion-thumbnail item-left>
+        <img [src]="y.thumbnail">
+      </ion-thumbnail>
+      <h2> {{y?.title}}</h2>
+      <p></p>
+      <button ion-button clear item-right ></button>
+    </ion-item>
+  </ion-list>
+
+
+</main>
 </ion-content>

@@ -1,0 +1,96 @@
+<ion-content padding class="transparent-header">
+  <ion-header>
+      <ion-navbar style="margin-top:10px;" color="main">
+          <ion-title style="color:#ffffff;">Profile Setting</ion-title>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-navbar>
+  </ion-header>
+  <p text-center class="pTop" (click)="updateImage()">
+    
+      <img class="avatar" [src]="user?.photo || 'assets/imgs/dp.png'" width="25%"><br>
+      <small class="textw">Change DP</small>
+  </p>
+  <div padding *ngIf="user">
+    <ion-item>
+      <ion-icon item-start name="person"></ion-icon>
+      <ion-input type="email" value="" placeholder="Email" [(ngModel)]="user.email"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon item-start name="person"></ion-icon>
+      <ion-input type="text" value="" placeholder="Name" [(ngModel)]="user.name"></ion-input>
+    </ion-item>
+
+    <ion-item>
+        <ion-icon item-start name="lock"></ion-icon>
+        <ion-input type="password" value="" placeholder="Password" disabled></ion-input>
+      </ion-item>
+
+    <ion-item>
+      <ion-icon item-start name="football"></ion-icon>
+      <ion-label color="lightwa">Postion</ion-label>
+      <ion-select class="lolSelect selectWrapper " [(ngModel)]="user.type">
+        <ion-option value="attacker">Attacker</ion-option>
+        <ion-option value="midfielder">MidFielder</ion-option>
+        <ion-option value="defencer">Defencer</ion-option>
+        <ion-option value="goalkeeper">GoalKeeper</ion-option>
+      </ion-select>
+      <ion-icon item-end name="arrow-down"></ion-icon>
+    </ion-item>
+
+    <ion-item>
+        <ion-icon item-start name="shirt"></ion-icon>
+        <ion-input type="text" value="" placeholder="Current Club" [(ngModel)]="user.clubName"></ion-input>
+      </ion-item>
+
+      <ion-item>
+          <ion-icon item-start name="man"></ion-icon>
+          <ion-input type="tel" value="" placeholder="Current Age" [(ngModel)]="user.age"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-icon item-start name="md-football"></ion-icon>
+          <ion-label color="lightwa">Foot</ion-label>
+          <ion-select class="lolSelect selectWrapper " [(ngModel)]="user.foot">
+            <ion-option value="left">Left</ion-option>
+            <ion-option value="right">Right</ion-option>
+          </ion-select>
+          <ion-icon item-end name="arrow-down"></ion-icon>
+        </ion-item>
+
+        <ion-item>
+            <ion-icon item-start name="phone-portrait"></ion-icon>
+            <ion-input type="tel" value="" placeholder="Phone Number" [(ngModel)]="user.phone"></ion-input>
+          </ion-item>
+
+          <ion-item>
+              <ion-icon item-start name="calendar"></ion-icon>
+              <ion-label >Select Busy Schedule Date</ion-label>
+              <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="myDate" placeholder="" [(ngModel)]="user.schedule"></ion-datetime>
+              <ion-icon item-end name="arrow-down"></ion-icon>
+            </ion-item>
+  
+        <ion-item>
+          <ion-icon item-start name="locate"></ion-icon>
+          <ion-input placeholder="Get GPS Location" readonly></ion-input>
+          <ion-icon item-end name="navigate"></ion-icon>
+        </ion-item>
+
+
+        <ion-item>
+          <ion-icon item-start name="trophy"></ion-icon>
+          <textarea #myInput id="myInput" rows="1" maxLength="500" (keyup)="resize()" [(ngModel)]="myStuff" placeholder=" Club acheivements and trophies"></textarea>
+    
+        </ion-item>
+  
+  
+        <ion-item>
+          <ion-label>Please make sure all the provided information is correct?</ion-label>
+          <ion-checkbox [(ngModel)]="user.completed" [disabled]="user.completed == true"></ion-checkbox>
+        </ion-item>
+  
+        <button ion-button block outline color="light" class="login-button" (click)="updateProfile()" *ngIf="user.completed == true">Update Profile</button>
+        <button ion-button block outline color="light" class="login-button" (click)="updateProfile()" *ngIf="user.completed == false">Create Profile</button>
+      </div>

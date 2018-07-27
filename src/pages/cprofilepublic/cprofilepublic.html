@@ -1,0 +1,45 @@
+<ion-content padding class="transparent-header">
+  <ion-header>
+    <ion-navbar color="main">
+        <button ion-button menuToggle>
+            <ion-icon name="menu" ></ion-icon>
+          </button>
+        <ion-title>Club Profile</ion-title>
+    </ion-navbar>
+  </ion-header>
+  <div id="profile-bg"></div>
+  <div id="content" *ngIf="club">
+    <div id="profile-info" padding>
+      <img id="profile-image" src="assets/imgs/dp.png">
+      <h3 id="profile-name">{{club?.name}}</h3>
+      <p>{{club?.location || 'location'}}</p>
+      <p>{{club?.phone}}</p>
+      <p class="profile-description">{{club?.description}}</p>
+    </div>
+    <hr>
+    <ion-row>
+      <ion-col text-center>
+        <h3>Players</h3>
+            <ion-icon (click)="players()" name="people" color="light" style="color:rgb(229, 253, 227);font-size:50px;"></ion-icon>
+
+      </ion-col>
+    </ion-row>
+    <hr/>
+    <h3 id="profile-name" >Upcoming Matches</h3>
+
+    <ion-list>
+        <ion-item>
+          <ion-icon name="calendar" item-start color="main"></ion-icon>
+            Date : <p item-end>{{club.match?.date}}</p>
+        </ion-item>
+        <ion-item>
+            <ion-icon name="clock" item-start color="main"></ion-icon>
+              Time : <p item-end> {{club.match?.time}}</p>
+          </ion-item>
+          <ion-item>
+              <ion-icon name="shirt" item-start color="main"></ion-icon>
+                Team : <p item-end> {{club.match?.team}}</p>
+            </ion-item>
+      </ion-list>
+  </div>
+</ion-content>

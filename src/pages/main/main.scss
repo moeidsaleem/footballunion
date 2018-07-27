@@ -1,0 +1,24 @@
+page-main {
+  
+  ion-content {
+    background: linear-gradient(to top, rgba(255,0,0,0), #4cd137); 
+  }
+  .image-slider {
+      background-origin: border-box !important;
+  }
+  ion-slide.swiper-slide {
+      right: 10%;
+      
+  }
+
+  .description{
+    text-align: justify !important;
+  }
+
+  .swiper-pagination-bullet-active{
+    background: color($colors, main) !important;
+    opacity: 1;
+  }
+
+  
+}

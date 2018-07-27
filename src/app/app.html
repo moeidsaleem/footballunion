@@ -1,1 +1,164 @@
-<ion-nav [root]="rootPage"></ion-nav>
+<ion-menu [content]="content" class="menu-material">
+  <ion-content>
+    <div class="menu-header" margin-bottom>
+      <p class="lightwa">Welcome to main menu</p>
+      <br>
+    </div>
+
+    <div margin-top>
+
+
+      <ion-list no-lines class="faasla"  *ngIf="!auth.getLocalTokens() || auth.getLocalTokens() == 'undefined'">
+        <button menuClose="left" ion-item detail-none (click)="homePagee()">
+          <ion-icon item-start name="home"></ion-icon>
+          <p class="namewa">Home</p>
+        </button>
+      </ion-list>
+
+      <ion-list no-lines class="faasla"  *ngIf="!auth.getLocalTokens() || auth.getLocalTokens() == 'undefined'">
+        <button menuClose="left" ion-item detail-none (click)="flogin()">
+          <ion-icon item-start name="shirt"></ion-icon>
+          <p class="namewa">Login as a footballer</p>
+        </button>
+      </ion-list>
+
+      <ion-list no-lines class="faasla"  *ngIf="!auth.getLocalTokens() || auth.getLocalTokens() == 'undefined'">
+        <button menuClose="left" ion-item detail-none (click)="clogin()">
+          <ion-icon item-start name="briefcase"></ion-icon>
+          <p class="namewa">Login as a club</p>
+        </button>
+      </ion-list>
+
+      <ion-list no-lines class="faasla"  *ngIf="!auth.getLocalTokens() || auth.getLocalTokens() == 'undefined'">
+        <button menuClose="left" ion-item detail-none (click)="homePagee()">
+          <ion-icon item-start name="pricetags"></ion-icon>
+          <p class="namewa">Payment offers for clubs</p>
+        </button>
+      </ion-list>
+
+      <ion-list no-lines class="faasla"  *ngIf="!auth.getLocalTokens() || auth.getLocalTokens() == 'undefined'">
+        <button menuClose="left" ion-item detail-none (click)="whyPaid()">
+          <ion-icon item-start name="alert"></ion-icon>
+          <p class="namewa">Why paid account ?</p>
+        </button>
+      </ion-list>
+
+      <ion-list no-lines class="faasla"  *ngIf="!auth.getLocalTokens() || auth.getLocalTokens() == 'undefined'">
+        <button menuClose="left" ion-item detail-none (click)="about()">
+          <ion-icon item-start name="bowtie"></ion-icon>
+          <p class="namewa">About us</p>
+        </button>
+      </ion-list>
+
+      <ion-item-divider color="light" margin-bottom  *ngIf="auth.getLocalTokens() && auth.getLocalTokens().accountType =='footballer'">Player Menu</ion-item-divider>
+
+      <ion-list no-lines class="faasla" margin-top *ngIf="auth.getLocalTokens() && auth.getLocalTokens().accountType =='footballer'">
+        <button menuClose="left" ion-item detail-none (click)="playerProfile()">
+          <ion-icon item-start name="football"></ion-icon>
+          <p class="namewa">Player Profile</p>
+        </button>
+      </ion-list>
+
+      <ion-list no-lines class="faasla" margin-top *ngIf="auth.getLocalTokens() && auth.getLocalTokens().accountType =='footballer'">
+        <button menuClose="left" ion-item detail-none (click)="playerSetting()">
+          <ion-icon item-start name="cog"></ion-icon>
+          <p class="namewa">Profile Settings</p>
+        </button>
+      </ion-list>
+
+      <ion-list no-lines class="faasla" margin-top *ngIf="auth.getLocalTokens() && auth.getLocalTokens().accountType =='footballer'">
+        <button menuClose="left" ion-item detail-none (click)="clubRequests()">
+          <ion-icon item-start name="albums"></ion-icon>
+          <p class="namewa">Club Requests</p>
+        </button>
+      </ion-list>
+
+      <ion-list no-lines class="faasla" *ngIf="auth.getLocalTokens() && auth.getLocalTokens().accountType =='footballer'">
+        <button menuClose="left" ion-item detail-none (click)="uploadVideo()">
+          <ion-icon item-start name="cloud-upload"></ion-icon>
+          <p class="namewa">Upload a Video</p>
+        </button>
+      </ion-list>
+
+      <ion-list no-lines class="faasla" *ngIf="auth.getLocalTokens() && auth.getLocalTokens().accountType =='footballer'">
+        <button menuClose="left" ion-item detail-none (click)="myVideos()">
+          <ion-icon item-start name="logo-youtube"></ion-icon>
+          <p class="namewa">My Videos</p>
+        </button>
+      </ion-list>
+      <ion-list no-lines class="faasla" *ngIf="auth.getLocalTokens() && auth.getLocalTokens().accountType =='footballer'">
+        <button menuClose="left" ion-item detail-none (click)="logout()">
+          <ion-icon item-start name="logo-youtube"></ion-icon>
+          <p class="namewa">Log Out</p>
+        </button>
+      </ion-list>
+
+      <ion-item-divider color="light" margin-bottom *ngIf="auth.getLocalTokens() && auth.getLocalTokens().accountType =='club'">Club Menu</ion-item-divider>
+      
+      <ion-list no-lines class="faasla" margin-top *ngIf="auth.getLocalTokens() && auth.getLocalTokens().accountType =='club'">
+          <button menuClose="left" ion-item detail-none (click)="clubProfile()">
+            <ion-icon item-start name="briefcase"></ion-icon>
+            <p class="namewa">Club Profile</p>
+          </button>
+        </ion-list>
+  
+        <ion-list no-lines class="faasla" margin-top *ngIf="auth.getLocalTokens() && auth.getLocalTokens().accountType =='club'">
+          <button menuClose="left" ion-item detail-none (click)="clubSetting()">
+            <ion-icon item-start name="settings"></ion-icon>
+            <p class="namewa">Profile Settings</p>
+          </button>
+        </ion-list>
+
+        <ion-list no-lines class="faasla" margin-top *ngIf="auth.getLocalTokens() && auth.getLocalTokens().accountType =='club'">
+            <button menuClose="left" ion-item detail-none (click)="searchPlayer()">
+              <ion-icon item-start name="search"></ion-icon>
+              <p class="namewa">Search a Player</p>
+            </button>
+          </ion-list>
+          <ion-list no-lines class="faasla" margin-top *ngIf="auth.getLocalTokens() && auth.getLocalTokens().accountType =='club'">
+              <button menuClose="left" ion-item detail-none (click)="myRequests()">
+                <ion-icon item-start name="create"></ion-icon>
+                <p class="namewa">My Request</p>
+              </button>
+            </ion-list>
+    
+          <ion-list no-lines class="faasla" margin-top *ngIf="auth.getLocalTokens() && auth.getLocalTokens().accountType =='club'">
+            <button menuClose="left" ion-item detail-none (click)="postRequest()">
+              <ion-icon item-start name="create"></ion-icon>
+              <p class="namewa">Post a request</p>
+            </button>
+          </ion-list>
+
+          <ion-list no-lines class="faasla" margin-top *ngIf="auth.getLocalTokens() && auth.getLocalTokens().accountType =='club'">
+              <button menuClose="left" ion-item detail-none (click)="scheduleMatch()">
+                <ion-icon item-start name="calendar"></ion-icon>
+                <p class="namewa">Schedule a Match</p>
+              </button>
+            </ion-list>
+      
+            <ion-list no-lines class="faasla" margin-top *ngIf="auth.getLocalTokens() && auth.getLocalTokens().accountType =='club'">
+              <button menuClose="left" ion-item detail-none (click)="Subscription()">
+                <ion-icon item-start name="star"></ion-icon>
+                <p class="namewa">Subscription</p>
+              </button>
+            </ion-list>
+
+            <ion-list no-lines class="faasla" margin-top *ngIf="auth.getLocalTokens() && auth.getLocalTokens().accountType =='club'">
+              <button menuClose="left" ion-item detail-none (click)="logout()">
+                <ion-icon item-start name="star"></ion-icon>
+                <p class="namewa">Log Out</p>
+              </button>
+            </ion-list>
+     
+
+
+
+
+
+
+    </div>
+  </ion-content>
+</ion-menu>
+
+
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>

@@ -1,0 +1,40 @@
+<ion-header>
+    <ion-navbar color="main">
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+          </button>   
+        <ion-title>Player Profile</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content parallax-header no-bounce class="bg-modal">
+    <div class="header-image"></div>
+    <div class="main-content" text-wrap text-center *ngIf="footballer">
+        <div class="circular"></div>
+        <h2>{{footballer?.name}} | {{footballer?.age}}</h2>
+        <p class="profile-description">{{footballer?.type}} @{{footballer?.clubName}}</p>
+        <hr>
+        <ion-list no-lines>
+            <ion-item>
+                <ion-icon name="mail" color="main" item-start></ion-icon>
+                <p>Email</p>
+                {{footballer?.email}}
+                <a button ion-button href="mailo:abc@xyz.com" color="main" item-end medium>Email me</a>
+            </ion-item>
+            <ion-item>
+                <ion-icon item-start name="call" color="danger"></ion-icon>
+                <p>Mobile</p>
+                {{footballer?.phone}}
+                <a button ion-button href="tel:090078601" color="danger" item-end medium>Call me</a>
+            </ion-item>
+           
+            <ion-item>
+                <ion-icon item-start name="pin" color="twitter"></ion-icon>
+                <p>{{footballer?.address || 'New Lalazar, Rawalpindi.'}}</p>
+            </ion-item>
+        </ion-list>
+        <button ion-button color="secondary" (click)="videos()">Watch my videos</button><hr>
+
+    </div>
+
+</ion-content>

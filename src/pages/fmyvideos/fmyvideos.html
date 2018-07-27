@@ -1,0 +1,28 @@
+<ion-header>
+
+  <ion-navbar color="main">
+    <button ion-button menuToggle>
+      <ion-icon name="menu" ></ion-icon>
+    </button>
+    <ion-title>My Videos</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+<div  *ngIf="videos">
+
+  <p text-center class="player" *ngFor="let x of videos">
+    <video   width="95%" controls="true" poster="assets/imgs/bg2.jpg" id="bgvid" >
+    <source src="{{x.url}}" type="video/mp4"> Your browser does not support the video tag.
+  </video>
+  <small class="videoText">{{x?.title}}</small>
+  </p>
+  <hr>
+
+</div>
+
+
+</ion-content>

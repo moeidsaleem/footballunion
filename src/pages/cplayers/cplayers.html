@@ -1,0 +1,37 @@
+<!--
+  Generated template for the FootballersPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar>
+      <ion-title>Club footballers</ion-title>
+    </ion-navbar>
+  
+  </ion-header>
+  
+  
+  <ion-content padding>
+      <div  *ngIf="footballers">
+          <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+        </div>
+    <ion-list *ngIf="footballers">
+      <ion-item *ngFor="let x of footballers">
+        <ion-avatar item-start>
+          <img [src]="x?.photo || 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXUSCWaQ8K4AP_DtuhrN0cJGfeNmokbNppZ2UVjIKoWQ_HiynL'">
+        </ion-avatar>
+        <h2>{{x?.name}}</h2>
+        <h3>{{x?.clubName || 'Atrix Football Club'}}</h3>
+  
+        <p>
+            <b>Age:</b><small>{{x?.age}}</small> || 
+            <b>Type:</b><small>{{x?.type}}</small> || 
+            <b>Videos:</b><small>{{x?.totalVideos || 0}}</small> || 
+        
+        </p>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+  

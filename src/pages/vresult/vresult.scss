@@ -1,0 +1,23 @@
+page-vresult {
+
+    .back{
+        background-blend-mode: darken #ffddee;
+        background-image: url('https://png.icons8.com/color/260/circled-play.png')
+    }
+    .backimg{
+        position: relative;
+        bottom:60px;
+        left: 20px;
+        size: 20px;
+        z-index: 9999999;
+        width:1px;
+        height: 2px;
+        image-rendering: optimizeSpeed;
+        background-color: grayscale($color: #000000);
+       // filter: grayscale($color: #e7e7e7);
+       // -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+        opacity: 0.6;
+
+    }
+
+}

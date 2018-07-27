@@ -1,0 +1,18 @@
+page-fmyvideos {
+    ion-content {
+        background: linear-gradient(to top, rgba(255,0,0,0), #4cd137); 
+      }     
+
+    .player{
+        position: relative;
+        text-align: center;        
+    }
+
+    .videoText {
+        position: absolute;
+        top: 10%;
+        left: 5%;
+        color: white;
+    }
+   
+}

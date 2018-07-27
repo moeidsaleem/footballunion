@@ -1,0 +1,57 @@
+<ion-content padding class="transparent-header">
+  <ion-header>
+      <ion-navbar style="margin-top:10px;" color="main">
+          <ion-title style="color:#ffffff;">Profile Setting</ion-title>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-navbar>
+  </ion-header>
+  <p text-center class="pTop" >
+
+    <img class="avatar" (click)="selectSource()" [src]="user?.photo || 'assets/imgs/dp.png'" width="25%">
+    <br>
+    <small class="textw">Update DP</small>
+
+  </p>
+  <div padding *ngIf="user"> 
+    <ion-item>
+      <ion-icon item-start name="person"></ion-icon>
+      <ion-input type="email" value="" placeholder="Email" [(ngModel)]="user.email" disabled></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-icon item-start name="lock"></ion-icon>
+      <ion-input type="password" value="" placeholder="Password" [(ngModel)]="user.password" disabled></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon item-start name="shirt"></ion-icon>
+      <ion-input type="text" value="" placeholder="Club Name" [(ngModel)]="user.name"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon item-start name="phone-portrait"></ion-icon>
+      <ion-input type="tel" value="" placeholder="Phone Number" [(ngModel)]="user.phone"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon item-start name="locate"></ion-icon>
+      <ion-input placeholder="Get GPS Location" readonly></ion-input>
+      <ion-icon item-end name="navigate"></ion-icon>
+    </ion-item>
+
+    <ion-item>
+        <ion-icon item-start name="trophy"></ion-icon>
+        <textarea #myInput id="myInput" rows="1" maxLength="500" (keyup)="resize()" [(ngModel)]="myStuff" placeholder=" Club acheivements and trophies"></textarea>
+  
+      </ion-item>
+
+
+      <ion-item>
+        <ion-label>Please make sure all the provided information is correct?</ion-label>
+        <ion-checkbox [(ngModel)]="user.completed"></ion-checkbox>
+      </ion-item>
+
+      <button ion-button block outline color="light" class="login-button" (click)="updateProfile()" *ngIf="user.completed == true">Update Profile</button>
+      <button ion-button block outline color="light" class="login-button" (click)="updateProfile()" *ngIf="user.completed == false">Create Profile</button>
+    </div>

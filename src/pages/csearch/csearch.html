@@ -1,0 +1,47 @@
+<ion-content padding class="transparent-header">
+    <ion-header>
+      <ion-navbar style="margin-top:10px;" color="main">
+          <ion-title style="color:#ffffff;">Search a Footballer</ion-title>
+        <button ion-button menuToggle>
+          <ion-icon name="menu"></ion-icon>        </button>
+      
+      </ion-navbar>
+    </ion-header>
+    
+    <p text-center><img class="logo" src="assets/imgs/logowa.png" /></p>
+
+    <div padding>
+      <ion-item>
+        <ion-icon item-start name="person"></ion-icon>
+        <ion-input type="text" value="" placeholder="Search by name" [(ngModel)]="search.name"></ion-input>
+      </ion-item>
+
+  
+      <ion-item>
+        <ion-icon item-start name="shirt"></ion-icon>
+        <ion-input type="number"  placeholder="Search by age"  [(ngModel)]="search.age"></ion-input>
+      </ion-item>
+
+      <ion-item>
+          <ion-icon item-start name="football"></ion-icon>
+          <ion-label color="lightwa">Search by Skills</ion-label>
+          <ion-select class="lolSelect selectWrapper"  [(ngModel)]="search.skill">
+            <ion-option value="attacker">Attacker</ion-option>
+            <ion-option value="midfielder">MidFielder</ion-option>
+            <ion-option value="defender">Defender</ion-option>
+            <ion-option value="goalkeeper">GoalKeeper</ion-option>
+          </ion-select>
+          <ion-icon item-end name="arrow-down"></ion-icon>
+        </ion-item>
+  
+  
+      <ion-item>
+        <ion-icon item-start name="locate"></ion-icon>
+        <ion-input placeholder="Search nearby footballer" readonly></ion-input>
+        <ion-icon item-end name="navigate"></ion-icon>
+      </ion-item>
+  
+     
+  
+      <button ion-button block outline color="light" class="login-button" (click)="searchFootballer()">Search</button>
+    </div>

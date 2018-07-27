@@ -1,0 +1,66 @@
+<ion-header>
+  <ion-navbar color="main">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Upload a Video</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+
+
+  <p text-center style="background-color: transparent;">
+    <img [src]="data.thumnail || 'assets/imgs/upload1.png'" width="33%" (click)="selectFile()">
+    <br>
+    <small>Click to upload a video</small>
+  </p>
+
+  <ion-list style="background-color: transparent;">
+    <ion-list-header>
+      Video Details  <span *ngIf="newUrl">: {{newUrl?.name}}</span>
+    </ion-list-header>
+    <ion-item>
+      <ion-icon item-start color="main" name="football"></ion-icon>
+      <ion-label class="label">Enter the Title</ion-label>
+      <ion-input item-end type="text" [(ngModel)]="data.title"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon item-start color="main" name="football"></ion-icon>
+      <ion-label class="label">Select Category</ion-label>
+      <ion-select class="lolSelect selectWrapper " [(ngModel)]="data.type">
+        <ion-option value="attacker">Attacker</ion-option>
+        <ion-option value="midfielder">MidFielder</ion-option>
+        <ion-option value="defender">Defender</ion-option>
+        <ion-option value="goalkeeper">GoalKeeper</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+        <ion-icon item-start color="main" name="football"></ion-icon>
+        <ion-label class="label" >upload a thumbnail</ion-label>
+        <ion-input item-end type="text" read-only ></ion-input>
+        <button ion-button color="main" item-end (click)="uploadThumbnail()">Upload</button>
+      </ion-item>
+
+  </ion-list>
+
+</ion-content>
+
+<ion-footer>
+    <button margin-top ion-button block  color="main" class="login-button" (click)="startUpload()">Upload</button>
+</ion-footer>
+
+<!-- <ion-header>
+  <ion-navbar color="primary">
+    <ion-title>
+      Upload Video
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+   <button ion-button (click)="selectFile()">Select File</button>
+</ion-content> -->

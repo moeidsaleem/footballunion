@@ -1,0 +1,69 @@
+<!--
+  Generated template for the CrequestsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar style="margin-top:10px;" color="main">
+        <ion-title style="color:#ffffff;">Club Request</ion-title>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <ion-list>
+        <ion-list-header>
+            Pending
+          </ion-list-header>
+            <ion-item-sliding *ngFor="let x of pending">
+        <ion-item >
+          <ion-avatar item-start>
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSkulbb72ofmAC2bMcCveoSDg1hN6DfHFKd4b0ZeUu6Cyv8LYnEQ">
+          </ion-avatar>
+          <h2 style="color:black">{{x?.type}}</h2>
+          <p>{{x?.description}}.</p>
+          <ion-badge color="danger">{{x?.status}}</ion-badge>
+        </ion-item>
+        <ion-item-options side="right">
+            <button ion-button color="danger" (click)="removeRequest(x.id)">
+              <ion-icon name="remove-circle"></ion-icon>
+              Delete
+            </button>
+          </ion-item-options>
+        </ion-item-sliding>
+
+        <ion-list-header>
+            Accepted
+          </ion-list-header>
+          <ion-item-sliding *ngFor="let x of accepted">
+              <ion-item >
+                <ion-avatar item-start>
+                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSkulbb72ofmAC2bMcCveoSDg1hN6DfHFKd4b0ZeUu6Cyv8LYnEQ">
+                </ion-avatar>
+                <h2 style="color:black">{{x?.footballerName}}</h2>
+                <p>{{x?.type}} || {{x?.footballerAge}}.</p>
+                <ion-badge color="primary">{{x?.status}}</ion-badge>
+                <ion-avatar item-end (click)="callPhone(x?.phone)">
+                  <img src="http://files.softicons.com/download/android-icons/flat-circles-icon-pack-by-vincent-winberg/ico/Phone.ico">
+                </ion-avatar>
+              </ion-item>
+              <ion-item-options side="right">
+                  <button ion-button color="danger" (click)="removeRequest(x.id)">
+                    <ion-icon name="remove-circle"></ion-icon>
+                    Delete
+                  </button>
+                </ion-item-options>
+              </ion-item-sliding>
+
+          <ion-list-header>
+              Rejected
+            </ion-list-header>
+      </ion-list>
+
+</ion-content>
