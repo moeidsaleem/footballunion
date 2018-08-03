@@ -78,7 +78,7 @@
 <main *ngIf="userFilter.title !==''">
 
   <ion-list>
-    <ion-item *ngFor="let y of videos | filterBy:userFilter" >
+    <ion-item *ngFor="let y of videos | filterBy:userFilter" (click)="playVideo(y.url)">
       <ion-thumbnail item-left>
         <img [src]="y.thumbnail">
       </ion-thumbnail>

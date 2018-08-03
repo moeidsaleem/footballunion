@@ -212,18 +212,11 @@ sendJoinRequest(data){
 }
 
 
-generateJoinRequest(data){
-  let clubId =JSON.parse(localStorage.getItem('data')).uid;
-  let request ={
-    description: data.description,
-   // footballerId:data.footballerId,
-    clubId: clubId,
-    type:data.type,
-    status:'pending',
-    clubName:data.clubName
-  }
-  return this.afs.collection('requests').add(request);
 
+
+generateJoinRequest(data){
+    return this.afs.collection('requests').add(data);
+  
 }
 
 

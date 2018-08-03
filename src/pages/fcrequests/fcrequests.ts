@@ -40,17 +40,16 @@ export class FcrequestsPage {
           return { id, ...data };
         });
       }).subscribe(data=>{
-        console.log(data);
+        // console.log(data);
           this.requests = data;
       })
-
-      
     });
   }
 
   user:any;
   view(request){
-    this.helper.presentConfirm(request.clubName, request.description + `<br> <br><hr><small> Call: ${request.phone || 'not-mentioned'}</small>`, 'Call','Cancel',()=>{
+    console.log(request);
+    this.helper.presentConfirm(request.clubName, request.description + `<br> <br><hr> <br> <small> Email: ${request.email} </small> <br> <small> Call: ${request.phone || 'not-mentioned'}</small>`, 'Call','Cancel',()=>{
         //success
         this.callPhone(request.phone);
         // this.spinner.load();

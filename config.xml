@@ -3,6 +3,12 @@
     <name>Football Union</name>
     <description>An awesome Ionic/Cordova app.</description>
     <author email="info@atrixdigital.com" href="http://atrixdigital.com/">Atrix Digital Solutions</author>
+    <universal-links>
+        <host name="https://footballunion.page.link" scheme="https" />
+        <host name="football-union.firebaseapp.com" scheme="https">
+            <path url="/__/auth/callback" />
+        </host>
+    </universal-links>
     <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
@@ -89,5 +95,7 @@
     <plugin name="com.paypal.cordova.mobilesdk" spec="^3.5.0" />
     <plugin name="cordova-plugin-filechooser" spec="^1.0.1" />
     <plugin name="cordova-plugin-googleplus" spec="^5.3.0" />
+    <plugin name="cordova-plugin-buildinfo" spec="^2.0.1" />
+    <plugin name="cordova-plugin-inappbrowser" spec="^3.0.0" />
     <engine name="android" spec="7.0.0" />
 </widget>

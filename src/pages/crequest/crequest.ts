@@ -24,7 +24,10 @@ export class CrequestPage {
     type:'',
     description:'',
     clubName:'',
-    phone:''
+    phone:'',
+    email:'',
+    clubId:'',
+    status:''
   }
   
   resize() {
@@ -49,14 +52,20 @@ export class CrequestPage {
     this.spinner.load();
     this.request.clubName = this.club.name;
     this.request.phone = this.club.phone;
+    this.request.email = this.club.email;
+    this.request.status = 'pending';
+
     this.api.generateJoinRequest(this.request).then(resp=>{
       this.spinner.dismiss();
       this.helper.presentToast(`Request Generated`);
       this.request={
         type:'',
+        status:'',
         description:'',
         clubName:'',
-        phone:''
+        phone:'',
+        email:'',
+        clubId:''
       }
     }).catch(err=>{
       this.helper.presentToast(err.message);

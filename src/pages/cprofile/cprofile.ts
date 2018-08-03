@@ -48,6 +48,7 @@ export class CprofilePage {
     console.log('ionViewDidLoad CProfilePAge');
     this.id =JSON.parse(localStorage.getItem('data')).uid;
     this.api.getClub(this.id).subscribe(user=>{
+      console.log(user);
       this.user =user;
     })
   }

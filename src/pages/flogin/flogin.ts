@@ -8,7 +8,7 @@ import { ApiProvider } from '../../providers/api/api';
 import { SpinnerProvider } from '../../providers/spinner/spinner';
 import { HelpersProvider } from '../../providers/helpers/helpers';
 import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
-
+import firebase from 'firebase';
 
 @IonicPage()
 @Component({
@@ -75,65 +75,107 @@ export class FloginPage {
   }
 
 
-
   facebookLogin(){
-    this.fb.login(['email','public_profile', 'user_friends', 'email'])
-    .then((res: FacebookLoginResponse) => {
-      console.log('Logged into Facebook!', res);
-      this.fb.api('me?fields=id,name,email,first_name,picture.width(600).height(600).as(picture_large)',[]).then(profilex=>{
-      let profile = {name:profilex['name'], email: profilex['email'], photo:profilex['picture_large']['data']['url']}
-      
-      
-      //first will check if id is still available. 
-      if(res.authResponse.userID){ /* if a valid facebook user  */
-        this.api.getFootballer(res.authResponse.userID).subscribe(user=>{  
-          if(user){  /* if a valid database user  */
-          let data={footballerId:res.authResponse.userID, email:profile.email,password:res.authResponse.accessToken, accountType:'footballer'};
-          console.log(`footballer logged In `);
-          //time to save locals
-          this.auth.saveLocalTokens(data.footballerId, res.authResponse.accessToken, data.accountType);
-          this.navCtrl.setRoot('FmyvideosPage').then(r=>{
-            this.spinner.dismiss();
-          });
+    let provider = new firebase.auth.FacebookAuthProvider();
+    firebase.auth().signInWithRedirect(provider).then(()=>{
+      firebase.auth().getRedirectResult().then(res=>{
+          this.api.getFootballer(res.user.uid).subscribe(resp=>{
+            if(resp){ /* if already in database user */
+              let data={footballerId:res.user.uid, email:res.user.email,  password:'', accountType:'footballer'};
+              console.log(`footballer logged In `);
+              //time to save locals
+              this.auth.saveLocalTokens(data.footballerId, res.user.refreshToken, data.accountType);
+              this.navCtrl.setRoot('FmyvideosPage').then(r=>{
+                this.spinner.dismiss();
+              });
 
-        }else{  /* if not a valid user then sign up */
-
-
-          this.helper.presentToast(`Registering Social User..`);
-          this.api.addFootballer(res.authResponse.userID, {
-            footballerId: res.authResponse.userID,
-            accountType:'footballer',
-            password: res.authResponse.accessToken,
-            clubId:'',
-            name:profile.name,
-            photo: profile.photo,
-            email:profile.email
-          }).then(()=>{
-            console.log(`footballer added `);
-            //time to save locals
-            this.auth.saveLocalTokens(res.authResponse.userID, res.authResponse.accessToken,'footballer');
-            this.navCtrl.setRoot('CprofilePage')
-          })
-        }
-        })
-           
-      }else{
-
-      }
-
-    },err=>{
-      console.log(err);
-      this.helper.presentToast(`Error loading Facebook Graph API data..`)
-    });
-
+            }else{  /* if not a database user */
+             this.helper.presentToast(`Registering Social User..`);
+             this.api.addFootballer(res.user.uid, {
+                        footballerId: res.user.uid,
+                        accountType:'footballer',
+                        loginMethod:'facebook',
+                        password: res.user.refreshToken,
+                        clubId:'',
+                        name:res.user.displayName,
+                        photo: res.user.photoURL,
+                        email:res.user.email
+                      }).then(()=>{
+                        console.log(`footballer added `);
+                        //time to save locals
+                        this.auth.saveLocalTokens(res.user.uid, res.user.refreshToken,'footballer');
+                        this.navCtrl.setRoot('FprofilePage')
+                      })
+                    }
+                    })
+        
+      }, err=>{
+         this.helper.presentToast(`Error retrieving data`)
+      })
+    }, error=>{
+      this.helper.presentToast(`Error logging In With Facebook!`)
     })
-    .catch(e =>{ 
-      console.log('Error logging into Facebook', e);
-      this.helper.presentCustomToast(`Error fbLogin:${String(e)} `, 7000, 'top')
-    });
-  
-  this.fb.logEvent(this.fb.EVENTS.EVENT_NAME_ADDED_TO_CART);
+
+
   }
+  // facebookLogin(){
+  //   this.fb.login(['email','public_profile', 'user_friends', 'email'])
+  //   .then((res: FacebookLoginResponse) => {
+  //     console.log('Logged into Facebook!', res);
+  //     this.fb.api('me?fields=id,name,email,first_name,picture.width(600).height(600).as(picture_large)',[]).then(profilex=>{
+  //     let profile = {name:profilex['name'], email: profilex['email'], photo:profilex['picture_large']['data']['url']}
+      
+      
+  //     //first will check if id is still available. 
+  //     if(res.authResponse.userID){ /* if a valid facebook user  */
+  //       this.api.getFootballer(res.authResponse.userID).subscribe(user=>{  
+  //         if(user){  /* if a valid database user  */
+  //         let data={footballerId:res.authResponse.userID, email:profile.email,password:res.authResponse.accessToken, accountType:'footballer'};
+  //         console.log(`footballer logged In `);
+  //         //time to save locals
+  //         this.auth.saveLocalTokens(data.footballerId, res.authResponse.accessToken, data.accountType);
+  //         this.navCtrl.setRoot('FmyvideosPage').then(r=>{
+  //           this.spinner.dismiss();
+  //         });
+
+  //       }else{  /* if not a valid user then sign up */
+
+
+  //         this.helper.presentToast(`Registering Social User..`);
+  //         this.api.addFootballer(res.authResponse.userID, {
+  //           footballerId: res.authResponse.userID,
+  //           accountType:'footballer',
+  //           password: res.authResponse.accessToken,
+  //           clubId:'',
+  //           name:profile.name,
+  //           photo: profile.photo,
+  //           email:profile.email
+  //         }).then(()=>{
+  //           console.log(`footballer added `);
+  //           //time to save locals
+  //           this.auth.saveLocalTokens(res.authResponse.userID, res.authResponse.accessToken,'footballer');
+  //           this.navCtrl.setRoot('CprofilePage')
+  //         })
+  //       }
+  //       })
+           
+  //     }else{
+
+  //     }
+
+  //   },err=>{
+  //     console.log(err);
+  //     this.helper.presentToast(`Error loading Facebook Graph API data..`)
+  //   });
+
+  //   })
+  //   .catch(e =>{ 
+  //     console.log('Error logging into Facebook', e);
+  //     this.helper.presentCustomToast(`Error fbLogin:${String(e)} `, 7000, 'top')
+  //   });
+  
+  // this.fb.logEvent(this.fb.EVENTS.EVENT_NAME_ADDED_TO_CART);
+  // }
 
 
 
