@@ -22,7 +22,7 @@ page-csearch {
   
     // Fullscreen animated rainbow gradient
     ion-content {
-      background: linear-gradient(316deg,#4cd137, #44bd32,#3ae374);
+      background: linear-gradient(316deg,rgb(100, 185, 178), rgb(100, 185, 178),rgb(100, 185, 178));
       background-size: 1800% 1800%;
       animation: rainbow 30s linear infinite;
     }

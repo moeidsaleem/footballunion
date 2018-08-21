@@ -15,6 +15,9 @@ import { ValidatorsModule } from '../validators/validators.module';
 //native plugins
 import { Camera } from '@ionic-native/camera';
 import { AndroidPermissions } from '@ionic-native/android-permissions';
+import { Stripe } from '@ionic-native/stripe';
+
+
 // import { VideoPlayer } from '@ionic-native/video-player';
 import { File } from '@ionic-native/file';
 import { FilePath} from '@ionic-native/file-path';
@@ -83,7 +86,8 @@ import { HttpModule } from '@angular/http';
     Facebook,
     CallNumber,
     PayPal,
-    GooglePlus
+    GooglePlus,
+    Stripe
   ]
 })
 export class AppModule {}

@@ -61,7 +61,9 @@ export class CsignupPage {
         this.navCtrl.setRoot('MainPage');
         this.spinner.dismiss();
       })
-    })
+    },err=>{
+      this.spinner.dismiss();
+       this.helper.presentToast(err.message)})
 
   }
 

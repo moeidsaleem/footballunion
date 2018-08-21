@@ -21,8 +21,10 @@ page-fprofile {
     }
   
     // Fullscreen animated rainbow gradient
+    // background: linear-gradient(to top, rgba(255,0,0,0), rgba(100, 185, 178, 0.548)); 
+
     ion-content {
-      background: linear-gradient(316deg,#4cd137, #44bd32,#3ae374);
+      background: linear-gradient(316deg, rgb(100, 185, 178),  rgba(100, 168, 185, 0.973), rgba(66, 228, 214, 0.904));
       background-size: 1800% 1800%;
       animation: rainbow 30s linear infinite;
     }

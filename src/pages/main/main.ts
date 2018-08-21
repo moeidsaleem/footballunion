@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { ApiProvider } from '../../providers/api/api';
 import { AuthProvider } from '../../providers/auth/auth';
 import { SpinnerProvider } from '../../providers/spinner/spinner';
@@ -21,6 +21,7 @@ import { PayPal, PayPalPayment, PayPalConfiguration } from '@ionic-native/paypal
 export class MainPage {
 
   constructor(public navCtrl: NavController,private payPal: PayPal,
+    public modalCtrl: ModalController,
      private api:ApiProvider,private auth:AuthProvider,
     private spinner:SpinnerProvider, private helper:HelpersProvider,
     public navParams: NavParams) {
@@ -33,9 +34,11 @@ export class MainPage {
   this.club =  JSON.parse(localStorage.getItem('data'))
   this.getPackages();
   }
+
+  status:any;
   ionViewCanLeave(){
-    let status = this.club.premium;
-    if(status && status == true){
+    this.status = this.club.premium;
+    if(this.status && this.status == true){
       return true;
     }else{
       return false;
@@ -101,42 +104,50 @@ datax;
 
 
 
-
-
-
-
   pay(selectedPackage){
-    this.payPal.init({
-      PayPalEnvironmentProduction: 'YOUR_PRODUCTION_CLIENT_ID',
-      PayPalEnvironmentSandbox: 'AQFKbpnWT04upY21yYs_Xn3YlQCNzYru_hdUUSK5e6jUXBrN20bPQUuZ6buiA1C-mRAwHPQdMkAr3CQn'
-    }).then(() => {
-      // Environments: PayPalEnvironmentNoNetwork, PayPalEnvironmentSandbox, PayPalEnvironmentProduction
-      this.payPal.prepareToRender('PayPalEnvironmentSandbox', new PayPalConfiguration({
-        // Only needed if you get an "Internal Service Error" after PayPal login!
-        //payPalShippingAddressOption: 2 // PayPalShippingAddressOptionPayPal
-      })).then(() => {
-        let payment = new PayPalPayment(selectedPackage.amount, 'USD', `Subscribed Package: ${selectedPackage.name}`, 'subscription');
-        this.payPal.renderSinglePaymentUI(payment).then(() => {
-          // Successfully paid
-          this.onSubscribe(selectedPackage);
-    
-        }, () => {
-          // Error or render dialog closed without being successful
-          this.helper.presentToast(`Cancel`)
-        });
-      }, () => {
-        // Error in configuration
-        this.helper.presentToast(`Error in making payment`)
+    this.status =true; /* for credit-card purpose */
+    this.api.selectedPackage = selectedPackage;
+    this.openModal('CreditcardPage', {final: selectedPackage.amount});
 
-      });
-    }, () => {
-      // Error in initialization, maybe PayPal isn't supported or something else
-      this.helper.presentToast(`Error: Paypal not supported.`);
-
-    });
+/*     this.onSubscribe(selectedPackage);      on success do this*/
   }
 
 
+
+  // pay(selectedPackage){
+  //   this.payPal.init({
+  //     PayPalEnvironmentProduction: 'YOUR_PRODUCTION_CLIENT_ID',
+  //     PayPalEnvironmentSandbox: 'AQFKbpnWT04upY21yYs_Xn3YlQCNzYru_hdUUSK5e6jUXBrN20bPQUuZ6buiA1C-mRAwHPQdMkAr3CQn'
+  //   }).then(() => {
+  //     // Environments: PayPalEnvironmentNoNetwork, PayPalEnvironmentSandbox, PayPalEnvironmentProduction
+  //     this.payPal.prepareToRender('PayPalEnvironmentSandbox', new PayPalConfiguration({
+  //       // Only needed if you get an "Internal Service Error" after PayPal login!
+  //       //payPalShippingAddressOption: 2 // PayPalShippingAddressOptionPayPal
+  //     })).then(() => {
+  //       let payment = new PayPalPayment(selectedPackage.amount, 'USD', `Subscribed Package: ${selectedPackage.name}`, 'subscription');
+  //       this.payPal.renderSinglePaymentUI(payment).then(() => {
+  //         // Successfully paid
+  //         this.onSubscribe(selectedPackage);
+    
+  //       }, () => {
+  //         // Error or render dialog closed without being successful
+  //         this.helper.presentToast(`Cancel`)
+  //       });
+  //     }, () => {
+  //       // Error in configuration
+  //       this.helper.presentToast(`Error in making payment`)
+
+  //     });
+  //   }, () => {
+  //     // Error in initialization, maybe PayPal isn't supported or something else
+  //     this.helper.presentToast(`Error: Paypal not supported.`);
+
+  //   });
+  // }
+
+  openModal(pageName, data) {
+    this.modalCtrl.create(pageName, {data:data}, { cssClass: 'inset-modal'}).present();
+  }
   
 
 }

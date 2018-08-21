@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>
+      PAYMENT
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+ 
+<ion-content padding>
+ 
+ <ion-row>
+   <ion-col text-center>
+     <h1>Credit Card</h1>
+     <h5 style="color:#acacac">Amount to be Paid: <b style="color:red">{{final || 0 | currency }}</b></h5>
+   </ion-col>
+ </ion-row>
+  <ion-list no-lines>
+
+    <ion-item>
+      <ion-label stacked>Card</ion-label>
+      <ion-input type="tel" [(ngModel)]="cardNumber" [attr.maxlength]="18" placehoder="4242424242424242" [textMask]="{mask: masks.cardNumber}"></ion-input>
+    </ion-item>
+
+
+    <ion-row>
+      <ion-col col-6>
+          <ion-item>
+              <ion-label stacked>Expiry Month  <small>(format: 'MM')</small></ion-label>
+              <ion-input type="tel" [attr.maxlength]="2"  [(ngModel)]="cardMonth" placehoder="04" [textMask]="{mask: masks.cardExpiry}"></ion-input>
+            </ion-item>
+        
+      </ion-col>
+      <ion-col col-6>
+          <ion-item>
+              <ion-label stacked>Expiry Year  <small>(format: 'YYYY')</small></ion-label>
+              <ion-input type="tel"  [attr.maxlength]="4"  [(ngModel)]="cardYear" placehoder="2018" [textMask]="{mask: masks.cardExpiry}"></ion-input>
+            </ion-item>
+        
+        </ion-col>
+    </ion-row>
+  
+    
+
+
+    <ion-item>
+      <ion-label stacked>CVV</ion-label>
+      <ion-input type="number" [(ngModel)]="cvv" [textMask]="{mask: masks.cvv}"></ion-input>
+    </ion-item>
+
+  </ion-list>
+  <hr>
+  <small>(Please enter Month and Year in correct format i.e. MM / YYYY )</small>
+ 
+  <button ion-button outline (click)="pay()" color="primary">Checkout</button>
+  <!-- <button ion-button outline (click)="cancel()" >Cancel</button> -->
+  <button ion-button class="pop-in" color="main" (click)="dismiss()" color="danger">Close</button>
+ 
+</ion-content>

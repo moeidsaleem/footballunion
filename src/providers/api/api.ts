@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { AngularFireStorage, AngularFireUploadTask } from 'angularfire2/storage';
+import { Headers, Http, RequestOptions, Response } from "@angular/http";
 
 /*
   Generated class for the ApiProvider provider.
@@ -11,8 +12,12 @@ import { AngularFireStorage, AngularFireUploadTask } from 'angularfire2/storage'
 */
 @Injectable()
 export class ApiProvider {
+  serverUrl='http://ec2-13-229-128-0.ap-southeast-1.compute.amazonaws.com:3001/'
+
   user;
-  constructor(private afs:AngularFirestore, private afStorage:AngularFireStorage) {
+  selectedPackage:any;
+  constructor(private afs:AngularFirestore,private http:Http,
+     private afStorage:AngularFireStorage) {
     console.log('Hello ApiProvider Provider');
   }
 
@@ -24,6 +29,9 @@ getTypeVideos(type){ /* type == 'attacker' || 'mid-fielder' || 'goal-keeper' */
 getTrending(){
   return this.afs.collection('videos', ref=>ref.where('trending','==',true)).snapshotChanges();
 }
+
+
+
 
 
 /* -------------------------- Footballer ------------------ */
@@ -192,7 +200,14 @@ getRequests(footballerId){
 
 //get type request 
 getTypeRequests(type){
-  return this.afs.collection('requests', ref=>ref.where('type','==',type).where('status','==','pending')).snapshotChanges();
+  if(!type){
+    
+    return this.afs.collection('requests').snapshotChanges();
+
+  }else{
+    return this.afs.collection('requests', ref=>ref.where('type','==',type).where('status','==','pending')).snapshotChanges();
+
+  }
 }
 
 
@@ -249,5 +264,14 @@ getPackages(){
   return this.afs.collection('packages').snapshotChanges();
 }
 
+
+
+sendPaymentToken(token, amount){
+  let headers = new Headers();
+  headers.append('Content-Type', 'application/json');
+//  let tokenId = token.card.id;
+  return this.http.post(this.serverUrl + 'payment', {stripeToken:token, amount: amount}, {headers:headers})
+  .map((response:Response)=> response.json())
+}
 
 }

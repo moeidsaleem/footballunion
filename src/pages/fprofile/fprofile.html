@@ -15,7 +15,7 @@
   <div padding *ngIf="user">
     <ion-item>
       <ion-icon item-start name="person"></ion-icon>
-      <ion-input type="email" value="" placeholder="Email" [(ngModel)]="user.email"></ion-input>
+      <ion-input type="email" value="" placeholder="Email" [(ngModel)]="user.email" disabled></ion-input>
     </ion-item>
 
     <ion-item>
@@ -25,7 +25,7 @@
 
     <ion-item>
         <ion-icon item-start name="lock"></ion-icon>
-        <ion-input type="password" value="" placeholder="Password" disabled></ion-input>
+        <ion-input type="password" value="" placeholder="Password" [(ngModel)]="user.password" disabled></ion-input>
       </ion-item>
 
     <ion-item>

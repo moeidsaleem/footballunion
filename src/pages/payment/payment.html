@@ -1,0 +1,81 @@
+<ion-header>
+  <ion-toolbar color="lightwa">
+    <button ion-button menuToggle>
+      <ion-icon name="menu" color="main"></ion-icon>
+    </button>
+    <ion-title text-center>Payment </ion-title>
+    <ion-buttons end  >
+      <button icon-only (tap)="navCtrl.push('CartPage')" clear style="background-color:white " >
+        <ion-icon name="cart" align="right" color="main" margin-right style="font-size:23px;position: relative;left:29px;">
+            <ion-badge color="main" style="font-size:8px;padding:-10px;position: relative;bottom:13px;" *ngIf="api.cart.length>0">{{api.cart.length}}</ion-badge>
+        </ion-icon>
+      </button>
+      </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+
+<ion-content>
+
+  
+  <ion-row>
+    <ion-col padding>
+      <p text-center>
+        <img class="process" src="assets/imgs/p3.png" />
+      </p>
+    </ion-col>
+  </ion-row>
+
+  
+
+
+
+  <ion-grid>
+    <ion-row>
+      <ion-col text-center col-12>
+        <h1>PAYMENT METHOD</h1>
+        
+      </ion-col>
+</ion-row>
+<ion-row>
+    <ion-col width-50 text-center>
+        <img  src="assets/imgs/credit-cardx.png"  />
+      <button ion-button full  (click)="method='credit-card'" [disabled]="method ==='credit-card'">Credit card</button>
+
+    </ion-col>
+    <ion-col width-50 text-center>
+      
+        <img  src="assets/imgs/paypalx.png"  />
+          <button [disabled]="method ==='paypal'"
+           (click)="method='paypal'" ion-button full>PayPal Account</button>
+    </ion-col>
+  </ion-row>
+  </ion-grid>
+
+  <hr>
+<ion-row>
+  <ion-col text-center>
+    <!-- <h5>PAYMENT METHOD: <strong style="color:rgb(15, 167, 35)">{{method | uppercase}}  </strong></h5> -->
+    <p>Paypal is not accepting credit cards, Please select Credit card option for card payments. </p>
+    <!-- Total Bill: {{api.order.total}} <br>
+    Discount: 20$ -->
+    <hr width="30%">
+  <!-- <strong>  Sub-Total: 320$</strong> -->
+
+    
+  </ion-col>
+</ion-row>
+
+
+</ion-content>
+
+<ion-footer>
+  <ion-row>
+    <ion-col col-4 class="footer" (click)="navCtrl.pop()">
+      <p text-center>Go Back</p>
+    </ion-col>
+    <ion-col col-8 class="footer" (click)="makePayment()">
+      <p text-center>Make Payment</ion-col>
+  </ion-row>
+</ion-footer>
